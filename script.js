@@ -11,9 +11,10 @@
   function onScroll(y) { if (header) header.classList.toggle('solid', (y || window.scrollY) > 40); }
   onScroll();
 
-  /* ---------- smooth scroll (Lenis) ---------- */
+  /* ---------- smooth scroll (Lenis) — desktop only ---------- */
+  var isTouch = matchMedia('(hover:none), (pointer:coarse)').matches || 'ontouchstart' in window;
   var lenis = null;
-  if (window.Lenis && !reduce) {
+  if (window.Lenis && !reduce && !isTouch) {
     lenis = new Lenis({ lerp: 0.11, wheelMultiplier: 1 });
     lenis.on('scroll', function (e) { onScroll(e.scroll); if (hasGSAP) ScrollTrigger.update(); });
     if (hasGSAP) { gsap.ticker.add(function (t) { lenis.raf(t * 1000); }); gsap.ticker.lagSmoothing(0); }
@@ -119,13 +120,17 @@
         .from('.hero-sub > *', { opacity: 0, y: 22, duration: 0.9, stagger: 0.12 }, 0.5)
         .from('.hero-strip .ph', { yPercent: 12, opacity: 0, duration: 1, stagger: 0.06 }, 0.6);
     }
-    // section reveals
+    // section reveals — anything already on screen shows immediately (mobile-safe)
     reveals.forEach(function (el) {
       gsap.set(el, { opacity: 0, y: 34 });
-      ScrollTrigger.create({
-        trigger: el, start: 'top 86%', once: true,
-        onEnter: function () { gsap.to(el, { opacity: 1, y: 0, duration: 0.95, ease: 'power3.out' }); }
-      });
+      if (el.getBoundingClientRect().top < window.innerHeight * 0.94) {
+        gsap.to(el, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', delay: 0.06 });
+      } else {
+        ScrollTrigger.create({
+          trigger: el, start: 'top 88%', once: true,
+          onEnter: function () { gsap.to(el, { opacity: 1, y: 0, duration: 0.95, ease: 'power3.out' }); }
+        });
+      }
     });
     // parallax on images
     gsap.utils.toArray('[data-parallax]').forEach(function (el) {
