@@ -1,124 +1,108 @@
-/* =====================================================================
-   7aDy.bug — interactions (vanilla, no deps)
-   ===================================================================== */
+/* 7aDy.bug — interactions (vanilla, no deps) */
 (function () {
   'use strict';
-  var root = document.documentElement;
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var M = window.MEMBERS || [];
 
-  /* ---- scroll progress ---- */
-  var progress = document.querySelector('.progress');
-  function onScroll() {
+  /* scroll progress */
+  var bar = document.querySelector('.progress');
+  addEventListener('scroll', function () {
     var h = document.documentElement;
-    var p = h.scrollTop / (h.scrollHeight - h.clientHeight || 1);
-    if (progress) progress.style.width = (p * 100).toFixed(2) + '%';
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+    if (bar) bar.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight || 1) * 100).toFixed(2) + '%';
+  }, { passive: true });
 
-  /* ---- custom cursor reticle ---- */
-  if (window.matchMedia('(hover:hover)').matches) {
-    var rx = window.innerWidth / 2, ry = window.innerHeight / 2, tx = rx, ty = ry;
-    window.addEventListener('pointermove', function (e) { tx = e.clientX; ty = e.clientY; });
-    (function loop() {
-      rx += (tx - rx) * 0.22; ry += (ty - ry) * 0.22;
-      root.style.setProperty('--cursor-x', rx + 'px');
-      root.style.setProperty('--cursor-y', ry + 'px');
-      requestAnimationFrame(loop);
-    })();
-    var hoverSel = 'a,button,input,textarea,.step,.member,.work,.pkg,.svc';
-    document.addEventListener('pointerover', function (e) {
-      if (e.target.closest(hoverSel)) document.body.classList.add('hovering');
-    });
-    document.addEventListener('pointerout', function (e) {
-      if (e.target.closest(hoverSel)) document.body.classList.remove('hovering');
-    });
-  }
-
-  /* ---- mobile menu ---- */
-  var menuBtn = document.querySelector('[data-menu]');
-  if (menuBtn) {
-    menuBtn.addEventListener('click', function () {
+  /* mobile menu */
+  var mb = document.querySelector('[data-menu]');
+  if (mb) {
+    mb.addEventListener('click', function () {
       var open = document.body.classList.toggle('menu-open');
-      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      mb.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
     document.querySelectorAll('#nav-links a').forEach(function (a) {
       a.addEventListener('click', function () { document.body.classList.remove('menu-open'); });
     });
   }
 
-  /* ---- mark current nav link ---- */
+  /* current nav */
+  var map = { home:'index.html', about:'about.html', works:'works.html', services:'services.html', contact:'contact.html', member:'about.html' };
   var page = document.body.getAttribute('data-page');
-  var map = { home: 'index.html', about: 'about.html', works: 'works.html', services: 'services.html', contact: 'contact.html' };
-  if (map[page]) {
-    document.querySelectorAll('#nav-links a').forEach(function (a) {
-      if (a.getAttribute('href') === map[page]) a.classList.add('current');
-    });
+  if (map[page]) document.querySelectorAll('#nav-links a').forEach(function (a) {
+    if (a.getAttribute('href') === map[page] && !a.classList.contains('btn')) a.classList.add('current');
+  });
+
+  /* team card markup */
+  function card(m) {
+    return '<a class="person" href="member.html?id=' + m.id + '">'
+      + '<div class="frame"><img src="' + m.photo + '" alt="' + m.name + '｜' + m.role + '" loading="lazy">'
+      + '<span class="view">查看介紹 →</span></div>'
+      + '<div class="meta"><span class="idx">' + m.id + '</span><h3>' + m.name + '</h3>'
+      + '<p class="role">' + m.role + '</p></div></a>';
+  }
+  var prev = document.getElementById('team-preview');
+  if (prev) prev.innerHTML = M.slice(0, 4).map(card).join('');
+  var full = document.getElementById('team-full');
+  if (full) full.innerHTML = M.map(card).join('');
+
+  /* member detail */
+  var root = document.getElementById('member-root');
+  if (root && M.length) {
+    var id = new URLSearchParams(location.search).get('id') || '01';
+    var i = M.findIndex(function (m) { return m.id === id; });
+    if (i < 0) i = 0;
+    var m = M[i], prevM = M[(i - 1 + M.length) % M.length], nextM = M[(i + 1) % M.length];
+    document.title = m.name + '｜7aDy.bug';
+    root.innerHTML =
+      '<div class="member-back reveal in"><a href="about.html">← 回團隊</a></div>'
+      + '<div class="member-hero">'
+      + '<div class="member-photo reveal in"><img src="' + m.photo + '" alt="' + m.name + '"></div>'
+      + '<div class="member-info reveal in">'
+      + '<p class="idx">Member ' + m.id + ' / 07</p>'
+      + '<h1>' + m.name + '</h1>'
+      + '<p class="role">' + m.role + '</p>'
+      + '<div class="bio">' + m.bio.map(function (p) { return '<p>' + p + '</p>'; }).join('') + '</div>'
+      + '<div class="member-block"><h4>專長</h4><div class="chips">'
+      + m.focus.map(function (f, k) { return '<span class="chip' + (k === 0 ? ' solid' : '') + '">' + f + '</span>'; }).join('')
+      + '</div></div>'
+      + '</div></div>'
+      + '<div class="member-nav">'
+      + '<a href="member.html?id=' + prevM.id + '">← ' + prevM.name + '</a>'
+      + '<a href="member.html?id=' + nextM.id + '">' + nextM.name + ' →</a>'
+      + '</div>';
   }
 
-  /* ---- reveal on scroll ---- */
+  /* reveal on scroll */
   var reveals = document.querySelectorAll('.reveal');
   if (reduce || !('IntersectionObserver' in window)) {
     reveals.forEach(function (el) { el.classList.add('in'); });
   } else {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en, i) {
-        if (en.isIntersecting) {
-          var el = en.target;
-          setTimeout(function () { el.classList.add('in'); }, (el.dataset.delay ? +el.dataset.delay : Math.min(i * 40, 160)));
-          io.unobserve(el);
-        }
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e, k) {
+        if (e.isIntersecting) { var el = e.target; setTimeout(function () { el.classList.add('in'); }, Math.min(k * 45, 180)); io.unobserve(el); }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
     reveals.forEach(function (el) { io.observe(el); });
   }
 
-  /* ---- typed tagline (home) ---- */
-  var typed = document.getElementById('typed');
-  if (typed && !reduce) {
-    var phrases = ['找出問題，解決問題。', 'find the bug.', '讓每個想法被完整看見。', 'fix the brand. 🐞'];
-    var pi = 0, ci = 0, deleting = false;
-    function tick() {
-      var full = phrases[pi];
-      ci += deleting ? -1 : 1;
-      typed.innerHTML = full.slice(0, ci) + '<span class="caret">|</span>';
-      var wait = deleting ? 42 : 92;
-      if (!deleting && ci === full.length) { wait = 1500; deleting = true; }
-      else if (deleting && ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; wait = 380; }
-      setTimeout(tick, wait);
-    }
-    tick();
-  } else if (typed) {
-    typed.textContent = '找出問題，解決問題。';
+  /* count-up */
+  function count(el) {
+    var t = parseFloat(el.dataset.count); if (isNaN(t)) return;
+    var suf = el.dataset.suffix || '', dec = (String(t).split('.')[1] || '').length;
+    if (reduce) { el.textContent = t + suf; return; }
+    var s = performance.now();
+    (function step(now) {
+      var p = Math.min((now - s) / 1300, 1), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = (t * e).toFixed(dec) + suf;
+      if (p < 1) requestAnimationFrame(step); else el.textContent = t.toFixed(dec) + suf;
+    })(s);
   }
-
-  /* ---- count-up numbers ---- */
-  function animateCount(el) {
-    var target = parseFloat(el.dataset.count);
-    if (isNaN(target)) return;
-    var suffix = el.dataset.suffix || '', prefix = el.dataset.prefix || '';
-    var decimals = (String(target).split('.')[1] || '').length;
-    if (reduce) { el.textContent = prefix + target + suffix; return; }
-    var start = performance.now(), dur = 1400;
-    function step(now) {
-      var t = Math.min((now - start) / dur, 1);
-      var eased = 1 - Math.pow(1 - t, 3);
-      el.textContent = prefix + (target * eased).toFixed(decimals) + suffix;
-      if (t < 1) requestAnimationFrame(step);
-      else el.textContent = prefix + target.toFixed(decimals) + suffix;
-    }
-    requestAnimationFrame(step);
-  }
-  var counters = document.querySelectorAll('[data-count]');
-  if (counters.length) {
-    if (!('IntersectionObserver' in window)) counters.forEach(animateCount);
+  var cs = document.querySelectorAll('[data-count]');
+  if (cs.length) {
+    if (!('IntersectionObserver' in window)) cs.forEach(count);
     else {
-      var cio = new IntersectionObserver(function (ents) {
-        ents.forEach(function (en) {
-          if (en.isIntersecting) { animateCount(en.target); cio.unobserve(en.target); }
-        });
+      var cio = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { count(e.target); cio.unobserve(e.target); } });
       }, { threshold: 0.6 });
-      counters.forEach(function (el) { cio.observe(el); });
+      cs.forEach(function (el) { cio.observe(el); });
     }
   }
 })();

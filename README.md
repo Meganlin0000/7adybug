@@ -43,10 +43,12 @@ git push
 2. **GitHub Pages**：把資料夾上傳到一個 GitHub repo → Settings → Pages → 選 main 分支 → 完成。
 3. **Cloudflare Pages / Vercel**：連結 GitHub repo 或直接上傳，免費方案即可。
 
-## 之後要換上「真的東西」（我先用佔位）
+## 成員資料
 
-- **成員照片**：`about.html` 目前用姓氏字母頭像。把七張去背/方形照片放進 `assets/`，再把每張 `.avatar` 換成 `<img>` 即可（要我幫你改就說一聲，也可以直接從你們的履歷 PDF 幫你裁圖）。
-- **作品圖 / 影片**：`works.html` 目前是文字卡。可加上作品縮圖或 IG/YouTube 連結。
+- **照片**：已從你們的履歷 PDF 抽出七張原始人像，裁成統一比例放在 `assets/team/01.jpg`～`07.jpg`。要換照片，直接覆蓋同名檔即可（建議 4:5 直式）。
+- **個人介紹 bio 是初稿**：全部寫在 `members.js`，每位成員的 `bio` 與 `focus`（專長）都能自由改寫成本人想呈現的版本。改完存檔、push 就更新。
+- **點進成員**：團隊頁每張照片都可點進 `member.html`，看到大頭照＋角色＋介紹＋專長＋上一位/下一位。
+- **作品圖 / 影片**：`works.html` 目前是文字列表。之後可加作品縮圖或 IG/YouTube 連結。
 - **聯絡表單**：`contact.html` 的表單用 **formsubmit.co** 寄到 `77ady.bug@gmail.com`。
   ⚠️ **第一次有人送出表單時，Gmail 會收到一封 formsubmit 的啟用確認信，點一下啟用後，之後的訊息才會正常寄達。**
 
