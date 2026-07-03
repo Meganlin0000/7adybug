@@ -101,7 +101,7 @@
     var id = new URLSearchParams(location.search).get('id') || '01';
     var i = M.findIndex(function (m) { return m.id === id; }); if (i < 0) i = 0;
     var m = M[i], p = M[(i - 1 + M.length) % M.length], n = M[(i + 1) % M.length];
-    document.title = m.name + '｜7aDy.bug';
+    document.title = m.name + '｜7aDy.bug 整合行銷團隊';
     root.innerHTML =
       '<div class="member-back"><a href="about.html">← 回團隊</a></div>'
       + '<div class="member-hero">'

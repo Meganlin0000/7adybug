@@ -451,9 +451,9 @@ body.menu-open .menu-btn span:nth-child(3){transform:translateY(-7.5px) rotate(-
   border:2px solid var(--ink);border-bottom:0;padding:4px 14px 5px}
 .splash-card::after{content:"NO.7 ／ 2026";position:absolute;top:14px;right:16px;font-family:var(--mono);font-size:.68rem;color:var(--muted)}
 .sp-tape{position:absolute;width:86px;height:24px;box-shadow:0 1px 2px rgba(0,0,0,.12)}
-.sp-tape.t1{top:-13px;left:56%;background:rgba(207,217,230,.92);transform:rotate(-4deg)}
+.sp-tape.t1{top:-13px;right:16%;background:rgba(207,217,230,.92);transform:rotate(-4deg)}
 .sp-tape.t2{bottom:-12px;right:12%;background:rgba(241,195,0,.8);transform:rotate(3deg)}
-.splash-logo{width:min(48vw,238px);margin:6px auto 4px;mix-blend-mode:multiply;
+.splash-logo{width:min(48vw,238px);margin:6px auto 4px;mix-blend-mode:multiply;filter:brightness(1.05) contrast(1.02);
   animation:logoIn .9s .15s cubic-bezier(.2,.8,.3,1.15) both}
 .splash-name{font-size:clamp(2.7rem,8vw,4.4rem);line-height:1.05;letter-spacing:.01em;margin-top:4px}
 .splash-name .red{color:var(--red)}
@@ -468,16 +468,17 @@ body.menu-open .menu-btn span:nth-child(3){transform:translateY(-7.5px) rotate(-
 .splash-sticky{position:absolute;left:-22px;bottom:132px;background:var(--yellow);font-weight:800;font-size:.86rem;
   color:var(--ink);padding:12px 14px;max-width:150px;line-height:1.4;transform:rotate(-5deg);
   box-shadow:2px 4px 8px rgba(0,0,0,.16);animation:cardIn .6s .4s both}
-.splash-hint{margin-top:14px;font-size:.85rem;font-weight:700;color:var(--red-deep);animation:cue 1.6s 1s ease-in-out infinite}
+.splash-hint{margin-top:14px;font-size:.85rem;font-weight:700;color:var(--red-deep);animation:hintNod 1.8s 1s ease-in-out infinite}
 @keyframes cardIn{from{opacity:0;transform:rotate(-1.2deg) translateY(34px) scale(.96)}to{opacity:1;transform:rotate(-1.2deg) translateY(0) scale(1)}}
 @keyframes logoIn{from{opacity:0;transform:scale(.82) rotate(-6deg)}to{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes hintNod{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
 @keyframes stampIn{from{opacity:0;transform:rotate(-10deg) scale(1.7)}to{opacity:1;transform:rotate(-10deg) scale(1)}}
-@media (max-width:560px){.splash-stamp{right:-8px;top:60px;font-size:.85rem}.splash-sticky{left:-10px;bottom:150px;max-width:126px;font-size:.8rem}}
+@media (max-width:560px){.splash-stamp{right:-6px;top:56px;font-size:.8rem;padding:5px 10px}.splash-sticky{position:static;display:inline-block;margin:16px auto 0;transform:rotate(-2deg);max-width:none;font-size:.82rem}}
 @media (prefers-reduced-motion:reduce){.splash-card,.splash-logo,.splash-stamp,.splash-sticky,.splash-hint{animation:none}}
 
 /* ===== 舊頁內封面(保留樣式相容) ===== */
 .cover{min-height:calc(100vh - 66px);display:grid;place-items:center;text-align:center;position:relative;padding:40px 20px}
-.cover-logo{width:min(56vw,330px);mix-blend-mode:multiply}
+.cover-logo{width:min(56vw,330px);mix-blend-mode:multiply;filter:brightness(1.05) contrast(1.02)}
 .cover-name{font-size:clamp(3rem,9vw,5.8rem);line-height:1.05;margin-top:10px;letter-spacing:.01em}
 .cover-name .red{color:var(--red)}
 .cover-sub{font-size:clamp(1rem,1.6vw,1.25rem);font-weight:700;color:var(--ink-2);margin-top:10px}
