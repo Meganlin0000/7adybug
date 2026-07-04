@@ -153,7 +153,7 @@ body.menu-open .menu-btn span:nth-child(3){transform:translateY(-7.5px) rotate(-
 .report li{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px dashed var(--line);font-size:.98rem}
 .report li .box{width:18px;height:18px;border:2px solid var(--ink);flex:none;display:grid;place-items:center;color:var(--red);font-weight:900;font-size:.72rem;line-height:0}
 .report li.done{color:var(--muted)}
-.report .stamp{position:absolute;top:64px;right:-14px;font-family:var(--mono);font-weight:700;color:var(--red);font-size:1.05rem;letter-spacing:.08em;
+.report .stamp{position:absolute;top:-16px;right:16px;background:var(--paper);font-family:var(--mono);font-weight:700;color:var(--red);font-size:1.05rem;letter-spacing:.08em;
   border:2.5px solid var(--red);padding:5px 12px;transform:rotate(-8deg);background:rgba(255,253,247,.72)}
 .report .sig{font-family:var(--sans);font-weight:900;color:var(--red);font-size:1.05rem;margin-top:18px;transform:rotate(-1.5deg)}
 .report .sticky{position:absolute;bottom:-24px;right:-12px;left:auto;background:var(--yellow);font-family:var(--sans);font-weight:800;
@@ -486,7 +486,7 @@ body.menu-open .menu-btn span:nth-child(3){transform:translateY(-7.5px) rotate(-
 @keyframes logoIn{from{opacity:0;transform:scale(.82) rotate(-6deg)}to{opacity:1;transform:scale(1) rotate(0)}}
 @keyframes hintNod{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
 @keyframes stampIn{from{opacity:0;transform:rotate(-10deg) scale(1.7)}to{opacity:1;transform:rotate(-10deg) scale(1)}}
-@media (max-width:640px){.report .stamp{top:-15px;right:12px;font-size:.85rem;padding:4px 10px;background:var(--paper)}
+@media (max-width:640px){.report .stamp{font-size:.85rem;padding:4px 10px}
   .report .sticky{bottom:-20px;right:-6px;font-size:.8rem}}
 @media (max-width:560px){.splash-stamp{top:12px;right:10px;font-size:.7rem;padding:4px 9px}.scrap.s4{display:none}.scrap.s5{width:36px;height:36px;bottom:9%;right:6%}}
 @media (prefers-reduced-motion:reduce){.splash-card,.splash-logo,.splash-stamp,.splash-sticky,.splash-hint{animation:none}}
