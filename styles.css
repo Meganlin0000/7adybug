@@ -78,9 +78,10 @@ strong{font-weight:700}
 
 /* buttons */
 .btn{display:inline-flex;align-items:center;gap:.5em;font-family:var(--sans);font-weight:700;font-size:1rem;
-  padding:14px 28px;background:var(--red);color:#fff;border:2px solid var(--ink);box-shadow:var(--shadow-sm);
+  padding:14px 28px;background:var(--red);color:#fff;border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink);
   transition:transform .18s,box-shadow .18s,background .2s}
-.btn:hover{transform:translate(-2px,-2px);box-shadow:5px 7px 0 rgba(30,30,30,.16);background:var(--red-deep)}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink);background:var(--red-deep)}
+.btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
 .btn.ghost{background:var(--paper);color:var(--ink)}
 .btn.ghost:hover{background:#fff}
 .arrow{transition:transform .2s}.btn:hover .arrow,.tlink:hover .arrow{transform:translate(3px,-3px)}
@@ -104,8 +105,10 @@ strong{font-weight:700}
 .nav-links a:hover,.nav-links a.current{color:var(--ink)}
 .nav-links a.current{position:relative}
 .nav-links a.current::after{content:"";position:absolute;left:13px;right:13px;bottom:2px;height:6px;background:var(--yellow);z-index:-1}
-.nav-links .navcta{font-family:var(--mono);font-weight:700;color:#fff;background:var(--red);border:2px solid var(--ink);padding:8px 16px;margin-left:6px}
-.nav-links .navcta:hover{background:var(--red-deep);color:#fff}
+.nav-links .navcta{font-family:var(--mono);font-weight:700;color:#fff;background:var(--red);border:2px solid var(--ink);padding:8px 16px;margin-left:6px;
+  box-shadow:3px 3px 0 var(--ink);transition:transform .18s,box-shadow .18s,background .2s}
+.nav-links .navcta:hover{background:var(--red-deep);color:#fff;transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--ink)}
+.nav-links .navcta:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
 .menu-btn{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:6px}
 .menu-btn span{width:24px;height:2.5px;background:var(--ink);transition:.3s}
 body.menu-open .menu-btn span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
