@@ -34,6 +34,7 @@
 html{-webkit-text-size-adjust:100%}
 html.lenis,html.lenis body{height:auto}
 .lenis.lenis-smooth{scroll-behavior:auto!important}
+html{overflow-x:hidden}
 body{
   font-family:var(--sans);background:var(--cream);color:var(--ink);
   font-size:17px;line-height:1.72;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden;
@@ -297,12 +298,22 @@ body.menu-open .menu-btn span:nth-child(3){transform:translateY(-7.5px) rotate(-
 .form-note{font-size:.82rem;color:var(--muted);margin-top:14px}
 
 /* CTA + footer */
-.cta .wrap{background:var(--red);border:2px solid var(--ink);box-shadow:6px 8px 0 rgba(30,30,30,.16);
-  padding:clamp(40px,6vw,72px);text-align:center;color:#fff;position:relative;overflow:hidden}
+.cta .wrap{background:var(--red);border:2px solid var(--ink);box-shadow:8px 10px 0 rgba(30,30,30,.2);
+  padding:clamp(40px,6vw,72px);text-align:center;color:#fff;position:relative;overflow:visible;transform:rotate(-.5deg)}
+.cta .wrap::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.13) 1.5px,transparent 1.5px);background-size:12px 12px;pointer-events:none}
+.cta h2,.cta p,.cta .actions{position:relative;z-index:1}
+.cta-tape{position:absolute;width:96px;height:26px;top:-14px;box-shadow:0 1px 2px rgba(0,0,0,.2);z-index:2}
+.cta-tape.l{left:7%;background:rgba(207,217,230,.95);transform:rotate(-5deg)}
+.cta-tape.r{right:7%;background:rgba(241,195,0,.9);transform:rotate(4deg)}
+.cta-bug{position:absolute;top:-30px;right:11%;width:56px;transform:rotate(8deg);z-index:2}
+.cta .ul{position:relative;white-space:nowrap}
+.cta .ul svg{position:absolute;left:-2%;bottom:-8px;width:104%;height:14px;pointer-events:none}
+@media (max-width:560px){.cta-bug{width:44px;top:-24px;right:8%}.cta-tape{width:72px}}
 .cta h2{color:#fff;font-size:clamp(1.7rem,3.2vw,2.6rem);margin-bottom:14px}
 .cta p{color:rgba(255,255,255,.9);max-width:46ch;margin:0 auto 26px}
 .cta .actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.cta .btn{background:var(--paper);color:var(--ink);border-color:var(--ink)}
+.cta .btn{background:var(--yellow);color:var(--ink);border-color:var(--ink)}
+.cta .btn:hover{background:#ffd21c}
 .cta .btn.line{background:transparent;color:#fff;border-color:#fff}
 .cta .btn.line:hover{background:#fff;color:var(--red)}
 
