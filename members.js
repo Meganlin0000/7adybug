@@ -1,4 +1,4 @@
-/* 7aDy.bug — 團隊成員資料（2026-07 定稿：職稱與介紹經團隊確認，語氣平實）
+/* Ladybug — 團隊成員資料（2026-07 定稿：職稱與介紹經團隊確認，語氣平實）
    works 連結型別:href=外連新分頁 / video=YouTube 燈箱播放 / embed=Drive 簡報·音檔·影片內嵌 / zoom=站內圖放大 */
 window.MEMBERS = [
   { id:"01", bug:"專抓故事講不進心裡的 bug。", name:"吳苡榛", role:"創意企劃", photo:"assets/team/01.jpg",
