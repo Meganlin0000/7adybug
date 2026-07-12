@@ -111,7 +111,7 @@
       + '<div class="member-hero">'
       + '<div class="member-photo"><img src="' + m.photo + '" alt="' + m.name + '"></div>'
       + '<div class="member-info">'
-      + '<p class="idx">Member ' + m.id + ' / 07</p><h1>' + m.name + '</h1><p class="role">' + m.role + '</p>'
+      + '<p class="idx">Member ' + m.id + ' / 07</p><h1>' + m.name + '</h1><p class="role">' + m.role + '</p>' + (m.bug ? '<p class="bugline">' + m.bug + '</p>' : '')
       + '<div class="bio">' + m.bio.map(function (t) { return '<p>' + t + '</p>'; }).join('') + '</div>'
       + '<div class="member-block"><h4>專長</h4><div class="chips">'
       + m.focus.map(function (f, k) { return '<span class="chip' + (k === 0 ? ' solid' : '') + '">' + f + '</span>'; }).join('')
@@ -181,7 +181,7 @@
       gsap.set(el, { opacity: 0, y: 34 });
       // 卡片網格內依序小錯落(svc/teaser/team),低調瀑布感
       var stag = 0, par = el.parentElement;
-      if (par && /(?:^| )(?:svc-grid|teaser-row|team-grid|memo-grid|timeline)(?: |$)/.test(par.className)) {
+      if (par && /(?:^| )(?:svc-grid|teaser-row|team-grid|memo-grid|timeline|plans2)(?: |$)/.test(par.className)) {
         stag = Math.min(Array.prototype.indexOf.call(par.children, el) * 0.07, 0.42);
       }
       if (el.getBoundingClientRect().top < window.innerHeight * 0.94) {

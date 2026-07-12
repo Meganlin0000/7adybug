@@ -320,6 +320,28 @@ body.menu-open .menu-btn span:nth-child(3){transform:translateY(-7.5px) rotate(-
 .flow.flow-in .step:nth-child(5)::after{transition-delay:.74s}
 @media (prefers-reduced-motion:reduce){.flow .step,.flow .step::after{opacity:1!important;transform:none!important;transition:none!important}}
 
+.trust-list{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:16px 34px;margin:0;padding:0}
+.trust-list li{background:var(--paper);border:2px solid var(--ink);box-shadow:4px 5px 0 rgba(30,30,30,.14);padding:16px 18px}
+.trust-list b{display:block;font-size:1rem;margin-bottom:4px}
+.trust-list b::before{content:"✓";color:var(--red);font-weight:900;margin-right:.5em}
+.trust-list span{color:var(--ink-2);font-size:.92rem;line-height:1.6}
+@media (max-width:720px){.trust-list{grid-template-columns:1fr}}
+.plans2{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media (max-width:900px){.plans2{grid-template-columns:1fr}}
+.plan2{background:var(--paper);border:2px solid var(--ink);box-shadow:var(--shadow);padding:26px 24px;position:relative;transition:transform .22s,box-shadow .22s}
+.plan2:hover{transform:translate(-2px,-5px) scale(1.02);box-shadow:10px 13px 0 rgba(30,30,30,.18)}
+.plan2 .ptag{display:inline-block;font-family:var(--mono);font-weight:700;font-size:.74rem;letter-spacing:.06em;border:2px solid var(--ink);padding:3px 10px;margin-bottom:12px}
+.plan2:nth-child(1) .ptag{background:var(--yellow)}
+.plan2:nth-child(2) .ptag{background:var(--red);color:#fff}
+.plan2:nth-child(3) .ptag{background:var(--blue)}
+.plan2 h3{font-size:1.2rem;margin-bottom:8px}
+.plan2 .fit{color:var(--ink-2);font-size:.92rem;margin-bottom:14px;min-height:3em}
+.plan2 ul{list-style:none;margin:0;padding:0;font-size:.92rem;color:var(--ink-2)}
+.plan2 ul li{padding:5px 0 5px 20px;position:relative;border-top:1px dashed var(--line)}
+.plan2 ul li::before{content:"✓";position:absolute;left:0;color:var(--red);font-weight:900}
+.plans-note{margin-top:22px;font-size:.85rem;color:var(--muted)}
+.bugline{font-family:var(--mono);font-weight:700;font-size:.82rem;color:var(--red-deep);margin:10px 0 0;letter-spacing:.02em}
+
 /* CTA + footer */
 .cta .wrap{background:var(--red);border:2px solid var(--ink);box-shadow:8px 10px 0 rgba(30,30,30,.2);
   padding:clamp(40px,6vw,72px);text-align:center;color:#fff;position:relative;overflow:visible;transform:rotate(-.5deg)}
