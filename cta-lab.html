@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CTA 設計提案｜7aDy.bug(內部頁)</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .lab-head{max-width:1100px;margin:40px auto 8px;padding:0 22px}
+  .lab-head h1{font-size:clamp(1.4rem,3vw,2rem)}
+  .lab-tag{display:inline-block;font-family:var(--mono);font-weight:700;font-size:.78rem;background:var(--ink);color:#fff;padding:5px 12px;margin:34px 0 14px}
+  .lab-note{color:var(--ink-2);font-size:.95rem;margin-top:6px}
+  .lab-wrap{max-width:1100px;margin:0 auto;padding:0 22px 80px}
+
+  /* ── A 診斷回函單 ── */
+  .cta-a{position:relative;background:var(--paper);border:2px solid var(--ink);box-shadow:7px 9px 0 rgba(30,30,30,.15);padding:clamp(36px,5vw,56px);text-align:center}
+  .cta-a::before{content:"";position:absolute;inset:10px;border:2px dashed rgba(30,30,30,.28);pointer-events:none}
+  .cta-a .tape{position:absolute;width:92px;height:26px;top:-13px;box-shadow:0 1px 2px rgba(0,0,0,.12)}
+  .cta-a .tape.l{left:9%;background:rgba(207,217,230,.92);transform:rotate(-5deg)}
+  .cta-a .tape.r{right:9%;background:rgba(241,195,0,.8);transform:rotate(4deg)}
+  .cta-a .slipno{font-family:var(--mono);font-size:.72rem;font-weight:700;letter-spacing:.12em;color:var(--muted)}
+  .cta-a h2{font-size:clamp(1.5rem,3.4vw,2.2rem);margin:12px 0 10px}
+  .cta-a p{color:var(--ink-2);margin-bottom:24px}
+  .cta-a .stamp2{position:absolute;top:22px;right:26px;font-family:var(--mono);font-weight:700;color:var(--red);border:3px solid var(--red);padding:5px 12px;transform:rotate(9deg);letter-spacing:.1em;opacity:.85;background:var(--paper)}
+
+  /* ── B 紅帶手作版 ── */
+  .cta-b{position:relative;background:var(--red);border:2px solid var(--ink);box-shadow:8px 10px 0 rgba(30,30,30,.2);
+    padding:clamp(40px,5.5vw,64px) clamp(24px,5vw,56px);text-align:center;color:#fff;transform:rotate(-.5deg)}
+  .cta-b::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.13) 1.5px,transparent 1.5px);background-size:12px 12px;pointer-events:none}
+  .cta-b .tape{position:absolute;width:96px;height:26px;top:-14px;box-shadow:0 1px 2px rgba(0,0,0,.2)}
+  .cta-b .tape.l{left:7%;background:rgba(207,217,230,.95);transform:rotate(-5deg)}
+  .cta-b .tape.r{right:7%;background:rgba(241,195,0,.9);transform:rotate(4deg)}
+  .cta-b .bug{position:absolute;top:-30px;right:12%;width:56px;transform:rotate(8deg)}
+  .cta-b h2{color:#fff;font-size:clamp(1.6rem,3.6vw,2.4rem);position:relative;z-index:1}
+  .cta-b .ul{position:relative;white-space:nowrap}
+  .cta-b .ul svg{position:absolute;left:-2%;bottom:-10px;width:104%;height:14px}
+  .cta-b p{color:rgba(255,251,240,.92);margin:14px 0 26px;position:relative;z-index:1}
+  .cta-b .btn{background:var(--yellow);color:var(--ink);border-color:var(--ink);box-shadow:4px 4px 0 var(--ink)}
+  .cta-b .btn:hover{background:#ffd21c}
+
+  /* ── C 便利貼 ── */
+  .cta-c{position:relative;max-width:640px;margin:0 auto;background:var(--yellow);padding:clamp(36px,5vw,52px) clamp(24px,4vw,44px) clamp(30px,4vw,44px);
+    transform:rotate(-1.2deg);box-shadow:6px 10px 0 rgba(30,30,30,.18);text-align:center}
+  .cta-c::after{content:"";position:absolute;right:0;bottom:0;border-style:solid;border-width:0 0 34px 34px;border-color:transparent transparent rgba(30,30,30,.14) transparent}
+  .cta-c .pin{position:absolute;top:-12px;left:50%;transform:translateX(-50%) rotate(-3deg);width:96px;height:26px;background:rgba(207,217,230,.95);box-shadow:0 1px 2px rgba(0,0,0,.15)}
+  .cta-c h2{font-size:clamp(1.5rem,3.2vw,2.1rem)}
+  .cta-c p{color:rgba(30,30,30,.75);margin:12px 0 22px}
+  .cta-c .memo2{position:absolute;left:-26px;bottom:-20px;background:var(--paper);border:2px solid var(--ink);font-family:var(--mono);font-size:.72rem;font-weight:700;padding:6px 10px;transform:rotate(-6deg);box-shadow:3px 3px 0 rgba(30,30,30,.15)}
+
+  /* ── D 終端機 ── */
+  .cta-d{position:relative;background:var(--ink);border:2px solid var(--ink);box-shadow:8px 10px 0 rgba(30,30,30,.25);padding:0;overflow:hidden}
+  .cta-d .bar{display:flex;gap:8px;align-items:center;padding:12px 16px;background:rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.12)}
+  .cta-d .dot{width:12px;height:12px;border-radius:50%}
+  .cta-d .dot:nth-child(1){background:var(--red)}.cta-d .dot:nth-child(2){background:var(--yellow)}.cta-d .dot:nth-child(3){background:var(--blue)}
+  .cta-d .bar span{font-family:var(--mono);font-size:.7rem;color:rgba(255,255,255,.45);margin-left:8px;letter-spacing:.08em}
+  .cta-d .body{padding:clamp(34px,5vw,54px) clamp(22px,4vw,48px);text-align:left;font-family:var(--mono)}
+  .cta-d .ln1{color:rgba(255,255,255,.45);font-size:.85rem;margin-bottom:14px}
+  .cta-d .ln2{color:#fff;font-family:var(--sans);font-weight:900;font-size:clamp(1.4rem,3.2vw,2.1rem);line-height:1.4}
+  .cta-d .ln2 .r{color:#ff7a4d}
+  .cta-d .cur{display:inline-block;width:.6em;background:var(--yellow);height:1.1em;vertical-align:-0.15em;margin-left:4px;animation:blinkc 1s steps(1) infinite}
+  @keyframes blinkc{50%{opacity:0}}
+  .cta-d .ln3{color:rgba(255,255,255,.5);font-size:.85rem;margin:16px 0 26px}
+  .cta-d .btn{box-shadow:4px 4px 0 rgba(255,255,255,.25)}
+</style>
+</head>
+<body data-page="lab">
+<div class="lab-head">
+  <h1>結尾行動區——四個設計方案</h1>
+  <p class="lab-note">同一段文案、四種做法。用手機直向看效果最準,回覆 A / B / C / D 即可。</p>
+</div>
+<div class="lab-wrap">
+
+  <div class="lab-tag">A｜診斷回函單(紙感、跟報告卡同語言)</div>
+  <section class="cta-a">
+    <span class="tape l"></span><span class="tape r"></span>
+    <div class="stamp2">FREE!</div>
+    <div class="slipno">REPLY SLIP · NO.0741</div>
+    <h2>不確定從哪開始?<br>先聊聊您的<span class="circle">品牌問題</span>。</h2>
+    <p>填一張診斷回函,我們免費幫您找第一個 bug。</p>
+    <a class="btn" href="contact.html">免費諮詢 <span class="arrow">↗</span></a>
+  </section>
+
+  <div class="lab-tag">B｜紅帶手作版(保留紅色量體,加膠帶、網點、瓢蟲、黃筆底線)</div>
+  <section class="cta-b">
+    <span class="tape l"></span><span class="tape r"></span>
+    <svg class="bug" viewBox="0 0 40 40" aria-hidden="true"><ellipse cx="20" cy="22" rx="13" ry="14.5" fill="#E04410" stroke="#1e1e1e" stroke-width="1.6"/><path d="M20 8v29" stroke="#1e1e1e" stroke-width="1.8"/><circle cx="20" cy="8" r="5.2" fill="#1e1e1e"/><circle cx="14.5" cy="18" r="2.1" fill="#1e1e1e"/><circle cx="25.5" cy="18" r="2.1" fill="#1e1e1e"/><circle cx="14.5" cy="27" r="1.9" fill="#1e1e1e"/><circle cx="25.5" cy="27" r="1.9" fill="#1e1e1e"/></svg>
+    <h2>不確定從哪開始?<br>先聊聊您的<span class="ul">品牌問題<svg viewBox="0 0 200 14" preserveAspectRatio="none"><path d="M4 9 C 40 13, 80 4, 120 8 S 180 11, 196 6" fill="none" stroke="#F1C300" stroke-width="5" stroke-linecap="round"/></svg></span>。</h2>
+    <p>告訴我們品牌目前卡在哪,我們先免費幫您找出第一個 bug。</p>
+    <a class="btn" href="contact.html">免費諮詢 <span class="arrow">↗</span></a>
+  </section>
+
+  <div class="lab-tag">C｜大便利貼(最手寫、最輕鬆)</div>
+  <div style="padding:10px 0 26px">
+  <section class="cta-c">
+    <span class="pin"></span>
+    <h2>不確定從哪開始?<br>先聊聊您的品牌問題。</h2>
+    <p>免費的,聊完至少帶走一張診斷清單。</p>
+    <a class="btn" href="contact.html">免費諮詢 <span class="arrow">↗</span></a>
+    <span class="memo2">TODO: 找 7aDy.bug ✓</span>
+  </section>
+  </div>
+
+  <div class="lab-tag">D｜除錯終端機(最貼 Debug 主題、跟 // 小標同語言)</div>
+  <section class="cta-d">
+    <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span>7ady.bug — debug console</span></div>
+    <div class="body">
+      <div class="ln1">// START_DEBUG · 免費初診</div>
+      <div class="ln2">不確定從哪開始?<br>先聊聊您的<span class="r">品牌問題</span><span class="cur"></span></div>
+      <div class="ln3">&gt; 回報症狀 → 我們找出第一個 bug → 給您修法</div>
+      <a class="btn" href="contact.html">免費諮詢 <span class="arrow">↗</span></a>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
