@@ -111,7 +111,7 @@
       + '<div class="member-hero">'
       + '<div class="member-photo"><img src="' + m.photo + '" alt="' + m.name + '"></div>'
       + '<div class="member-info">'
-      + '<p class="idx">Member ' + m.id + ' / 07</p><h1>' + m.name + '</h1><p class="role">' + m.role + '</p>' + (m.bug ? '<p class="bugline">' + m.bug + '</p>' : '')
+      + '<p class="idx">Member ' + m.id + ' / 07</p><h1>' + m.name + '</h1><p class="role">' + m.role + '</p>'
       + '<div class="bio">' + m.bio.map(function (t) { return '<p>' + t + '</p>'; }).join('') + '</div>'
       + '<div class="member-block"><h4>專長</h4><div class="chips">'
       + m.focus.map(function (f, k) { return '<span class="chip' + (k === 0 ? ' solid' : '') + '">' + f + '</span>'; }).join('')
